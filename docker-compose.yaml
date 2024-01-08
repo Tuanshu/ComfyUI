@@ -32,3 +32,4 @@ services:
       - "./input:/app/input"
       - "./temp:/app/output/temp"
       - "./output:/app/output"
+      - "./web:/app/web"
