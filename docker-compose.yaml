@@ -27,3 +27,8 @@ services:
     ports:
       - "6606:8188" # Maps port 8188 of the container to port 8188 on the host
     #command: python -u main.py --listen ${COMFYUI_ADDRESS} --port ${COMFYUI_PORT} ${COMFYUI_EXTRA_BUILD_ARGS} ${COMFYUI_EXTRA_ARGS}
+    volumes:
+      - "./models:/app/models"
+      - "./input:/app/input"
+      - "./temp:/app/output/temp"
+      - "./output:/app/output"
