@@ -3,6 +3,14 @@ version: '3.8'
 services:
   custom_comfyui:
     # You can replace 'your_service_name' with the desired service name
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              count: all
+              capabilities: [ gpu ]
+
     build:
       context: . # Assuming your Dockerfile is in the current directory
       args:
@@ -18,4 +26,4 @@ services:
       COMFYUI_EXTRA_ARGS: ""
     ports:
       - "6606:8188" # Maps port 8188 of the container to port 8188 on the host
-    command: python -u main.py --listen ${COMFYUI_ADDRESS} --port ${COMFYUI_PORT} ${COMFYUI_EXTRA_BUILD_ARGS} ${COMFYUI_EXTRA_ARGS}
+    #command: python -u main.py --listen ${COMFYUI_ADDRESS} --port ${COMFYUI_PORT} ${COMFYUI_EXTRA_BUILD_ARGS} ${COMFYUI_EXTRA_ARGS}
