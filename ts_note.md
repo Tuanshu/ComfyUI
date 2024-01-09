@@ -40,3 +40,18 @@ enable BuildKit by setting the DOCKER_BUILDKIT environment variable.
 NOTE: For building the CPU-only image, it is recommended that you add the --cpu flag to the EXTRA_ARGS build arg:
 
 ```docker buildx --build-arg PYTORCH_INSTALL_ARGS="--index-url https://download.pytorch.org/whl/cpu" --build-arg EXTRA_ARGS=--cpu .```
+
+
+
+rsync -avzh --partial --progress -e "ssh -i /path/to/your/key.pem" user@210.58.xxx.45:/data/docker_images/custom_comfyui_240109.tar /path/to/destination/custom_comfyui_240109.tar
+
+
+ rsync -avzh --partial -e "ssh -i /home/tuanshu/.ssh/fu-yuan-tan-hpc-key.pem" --progress centos@210.58.113.45:/data/docker_images/custom_comfyui_240109.tar custom_comfyui_240109.tar
+
+rsync -avzh --partial -e "ssh -i /home/tuanshu/.ssh/fu-yuan-tan-hpc-key.pem" --progress centos@210.58.113.45:/data/docker_images/custom_comfyui_240109.tar custom_comfyui_240109.tar
+
+ C:\Users\TuanShu\.ssh
+
+rsync -avzh --partial -e "ssh -i /home/tuanshu/.ssh/fu-yuan-tan-hpc-key.pem" --progress centos@210.58.113.45:/data/repos/stable-diffusion-docker/sd-models/sd_xl_turbo_1.0_fp16.safetensors sd_xl_turbo_1.0_fp16.safetensors
+
+
