@@ -674,7 +674,7 @@ export class ComfyUI {
 					$el("input", {
 						id: "autoQueueCheckbox",
 						type: "checkbox",
-						checked: true,
+						checked: false,
 						title: "Automatically queue prompt when the queue size hits 0",
 
 					}),
