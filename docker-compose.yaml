@@ -1,16 +1,35 @@
 version: '3.8'
 
 services:
-  your_service_name:  # You can replace 'your_service_name' with the desired service name
+  custom_comfyui:
+    # You can replace 'your_service_name' with the desired service name
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              count: all
+              capabilities: [ gpu ]
+
     build:
-      context: .  # Assuming your Dockerfile is in the current directory
+      context: . # Assuming your Dockerfile is in the current directory
       args:
         PYTORCH_INSTALL_ARGS: "--index-url https://download.pytorch.org/whl/cu121"
+        COMFYUI_ADDRESS: "0.0.0.0"
+        COMFYUI_PORT: "8188"
+        COMFYUI_EXTRA_BUILD_ARGS: "" #"${EXTRA_ARGS}"
+        COMFYUI_EXTRA_ARGS: ""
     environment:
       COMFYUI_ADDRESS: "0.0.0.0"
       COMFYUI_PORT: "8188"
       COMFYUI_EXTRA_BUILD_ARGS: "" #"${EXTRA_ARGS}"
       COMFYUI_EXTRA_ARGS: ""
     ports:
-      - "6606:8188"  # Maps port 8188 of the container to port 8188 on the host
-    command: python -u main.py --listen ${COMFYUI_ADDRESS} --port ${COMFYUI_PORT} ${COMFYUI_EXTRA_BUILD_ARGS} ${COMFYUI_EXTRA_ARGS}
+      - "6601:8188" # Maps port 8188 of the container to port 8188 on the host
+    #command: python -u main.py --listen ${COMFYUI_ADDRESS} --port ${COMFYUI_PORT} ${COMFYUI_EXTRA_BUILD_ARGS} ${COMFYUI_EXTRA_ARGS}
+    volumes:
+      - "./models:/app/models"
+      - "./input:/app/input"
+      - "./temp:/app/output/temp"
+      - "./output:/app/output"
+      - "./web:/app/web"
