@@ -1,0 +1,263 @@
+{
+  "last_node_id": 27,
+  "last_link_id": 54,
+  "nodes": [
+    {
+      "id": 14,
+      "type": "KSamplerSelect",
+      "outputs": [
+        {
+          "name": "SAMPLER",
+          "type": "SAMPLER",
+          "links": [
+            18
+          ]
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "KSamplerSelect"
+      },
+      "widgets_values": [
+        "euler_ancestral"
+      ]
+    },
+    {
+      "id": 20,
+      "type": "CheckpointLoaderSimple",
+      "outputs": [
+        {
+          "name": "MODEL",
+          "type": "MODEL",
+          "slot_index": 0
+        },
+        {
+          "name": "CLIP",
+          "type": "CLIP",
+          "slot_index": 1
+        },
+        {
+          "name": "VAE",
+          "type": "VAE",
+          "slot_index": 2
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "CheckpointLoaderSimple"
+      },
+      "widgets_values": [
+        "sd_xl_turbo_1.0_fp16.safetensors"
+      ]
+    },
+    {
+      "id": 8,
+      "type": "VAEDecode",
+      "inputs": [
+        {
+          "name": "samples",
+          "type": "LATENT",
+          "link": 28
+        },
+        {
+          "name": "vae",
+          "type": "VAE",
+          "link": 40,
+          "slot_index": 1
+        }
+      ],
+      "outputs": [
+        {
+          "name": "IMAGE",
+          "type": "IMAGE",
+          "slot_index": 0
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "VAEDecode"
+      }
+    },
+    {
+      "id": 25,
+      "type": "PreviewImage",
+      "inputs": [
+        {
+          "name": "images",
+          "type": "IMAGE",
+          "link": 53
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "PreviewImage"
+      }
+    },
+    {
+      "id": 5,
+      "type": "EmptyLatentImage",
+      "outputs": [
+        {
+          "name": "LATENT",
+          "type": "LATENT",
+          "slot_index": 0
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "EmptyLatentImage"
+      },
+      "widgets_values": [
+        512,
+        512,
+        1
+      ]
+    },
+    {
+      "id": 27,
+      "type": "SaveImage",
+      "inputs": [
+        {
+          "name": "images",
+          "type": "IMAGE",
+          "link": 54
+        }
+      ],
+      "properties": {},
+      "widgets_values": [
+        "ComfyUI"
+      ]
+    },
+    {
+      "id": 7,
+      "type": "CLIPTextEncode",
+      "inputs": [
+        {
+          "name": "clip",
+          "type": "CLIP",
+          "link": 39
+        }
+      ],
+      "outputs": [
+        {
+          "name": "CONDITIONING",
+          "type": "CONDITIONING",
+          "slot_index": 0
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "CLIPTextEncode"
+      },
+      "widgets_values": [
+        "text, watermark"
+      ]
+    },
+    {
+      "id": 6,
+      "type": "CLIPTextEncode",
+      "inputs": [
+        {
+          "name": "clip",
+          "type": "CLIP",
+          "link": 38,
+          "slot_index": 0
+        }
+      ],
+      "outputs": [
+        {
+          "name": "CONDITIONING",
+          "type": "CONDITIONING",
+          "slot_index": 0
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "CLIPTextEncode"
+      },
+      "widgets_values": [
+        "cat red apple forest"
+      ]
+    },
+    {
+      "id": 13,
+      "type": "SamplerCustom",
+      "inputs": [
+        {
+          "name": "model",
+          "type": "MODEL",
+          "link": 41,
+          "slot_index": 0
+        },
+        {
+          "name": "positive",
+          "type": "CONDITIONING",
+          "link": 19,
+          "slot_index": 1
+        },
+        {
+          "name": "negative",
+          "type": "CONDITIONING",
+          "link": 20
+        },
+        {
+          "name": "sampler",
+          "type": "SAMPLER",
+          "link": 18,
+          "slot_index": 3
+        },
+        {
+          "name": "sigmas",
+          "type": "SIGMAS",
+          "link": 49,
+          "slot_index": 4
+        },
+        {
+          "name": "latent_image",
+          "type": "LATENT",
+          "link": 23,
+          "slot_index": 5
+        }
+      ],
+      "outputs": [
+        {
+          "name": "output",
+          "type": "LATENT",
+          "slot_index": 0
+        },
+        {
+          "name": "denoised_output",
+          "type": "LATENT"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "SamplerCustom"
+      },
+      "widgets_values": [
+        true,
+        0,
+        "fixed",
+        1
+      ]
+    },
+    {
+      "id": 22,
+      "type": "SDTurboScheduler",
+      "inputs": [
+        {
+          "name": "model",
+          "type": "MODEL",
+          "link": 45,
+          "slot_index": 0
+        }
+      ],
+      "outputs": [
+        {
+          "name": "SIGMAS",
+          "type": "SIGMAS",
+          "slot_index": 0
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "SDTurboScheduler"
+      },
+      "widgets_values": [
+        1,
+        1
+      ]
+    }
+  ]
+}
